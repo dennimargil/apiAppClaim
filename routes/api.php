@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+// estas rutas se pueden acceder sin proveer de un token válido.
+Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
+// estas rutas requiren de un token válido para poder accederse.
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::post('/logout', 'AuthController@logout');
 });
