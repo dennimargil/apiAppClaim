@@ -19,5 +19,13 @@ Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 // estas rutas requiren de un token válido para poder accederse.
 Route::group(['middleware' => 'jwt.auth'], function () {
+	
     Route::post('/logout', 'AuthController@logout');
+
+    Route::resource('peoples', 'PeopleController');
+    Route::resource('subjects', 'SubjectController');
+    Route::resource('sections', 'SectionController');
+    Route::resource('resources', 'ResourceController');
+    Route::resource('periods', 'PeriodController');
+
 });

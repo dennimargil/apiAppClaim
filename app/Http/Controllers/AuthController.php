@@ -17,14 +17,15 @@ class AuthController extends Controller
 		$user->name = $request->name;
 		$user->email = $request->email;
 		$user->password = bcrypt($request->password);
+		$user->role = $request->role;
 		$user->save();
-
+		
 		if ($this->loginAfterSignUp) {
 			return  $this->login($request);
 		}
 
 		return  response()->json([
-			'status' => 'ok',
+			'status' => '¡Estudiante Registrado!',
 			'data' => $user
 		], 200);
 	}
